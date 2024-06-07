@@ -5,6 +5,8 @@ import Hero from "@/components/Hero";
 import RecentProjects from "@/components/RecentProjects";
 import { FloatingNav } from "@/components/ui/FloatingNav";
 import { navItems } from "@/data";
+import Experience from "@/components/Experience";
+import Approach from "@/components/Approach";
 
 export default function Home() {
   const Grid = dynamic(() => import("@/components/Grid"), {
@@ -20,6 +22,8 @@ export default function Home() {
         <Grid />
         <RecentProjects />
         <Clients />
+        <Experience />
+        <Approach />
       </div>
     </main>
   );
