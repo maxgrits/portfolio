@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { IoCopyOutline } from "react-icons/io5";
+import { IoCheckmark, IoCopyOutline } from "react-icons/io5";
 
 import Lottie from "react-lottie";
 
@@ -54,6 +54,7 @@ export const BentoGridItem = ({
   const rightLists = ["VueJS", "NuxtJS", "GraphQL"];
 
   const [copied, setCopied] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
 
   const defaultOptions = {
     loop: copied,
@@ -65,9 +66,13 @@ export const BentoGridItem = ({
   };
 
   const handleCopy = () => {
-    const text = "hsu@jsmastery.pro";
+    const text = "angelsdevcompany@gmail.com";
     navigator.clipboard.writeText(text);
     setCopied(true);
+    setAnimationKey((prevKey) => prevKey + 1); // Change key to retrigger animation
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000); // Reset copied state after 2 seconds
   };
 
   return (
@@ -165,12 +170,16 @@ export const BentoGridItem = ({
                   copied ? "block" : "hidden"
                 }`}
               >
-                <Lottie options={defaultOptions} height={200} width={400} />
+                <Lottie
+                  key={animationKey}
+                  options={defaultOptions}
+                  height={200}
+                  width={400}
+                />
               </div>
-
               <MagicButton
                 title={copied ? "Email is Copied!" : "Copy my email address"}
-                icon={<IoCopyOutline />}
+                icon={copied ? <IoCheckmark /> : <IoCopyOutline />}
                 position="left"
                 handleClick={handleCopy}
                 otherClasses="!bg-[#161A31]"
